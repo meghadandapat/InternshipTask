@@ -10,13 +10,16 @@ const Table = ({
   const [selectedId, setSelectedId] = useState([]);
   const [isDeselected, setIsDeselected] = useState()
   
+  
   //creates an array which stores ids of all selected rows
   //needed for deleteSelected function
   const selectHandler = (e, id) => {
     if (e.target.checked) {
       selectedId.push(id);
+      
     } else {
       selectedId.pop(id);
+      
     }
     setSelectedId(selectedId);
   };
@@ -72,8 +75,8 @@ const Table = ({
               }
             })
             .map((user) => (
-              <tr key={user.id}>
-                <th scope="row">
+              <tr key={user.id} >
+                <th scope="row"  >
                   <input
                     type="checkbox"
                     onChange={(e) => selectHandler(e, user.id)}
@@ -81,7 +84,7 @@ const Table = ({
                     style={{transform:"scale(1.5)"}}
                   />
                 </th>
-                <td>{user.name}</td>
+                <td >{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
