@@ -7,8 +7,9 @@ import Table from "./Table";
 import Pagination from "./Pagination";
 import Searchbar from "./Searchbar";
 
+//Parent component
 const AdminPage = () => {
-  //  
+  
   const [users, setUsers] = useState([]);
   const [usersPerPage, setUsersPerPage] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,6 +19,7 @@ const AdminPage = () => {
     loadUsers();
   }, []);
 
+  //get data from endpoint
   const loadUsers = async () => {
     const result = await axios.get(
       "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
@@ -27,15 +29,18 @@ const AdminPage = () => {
     setUsersPerPage(_(result.data).slice(0).take(pageSize).value());
   };
 
+  //function to delete rows
   const deleteHandler = (id) => {
     const newUsers = usersPerPage.filter((user) => user.id !== id);
     setUsersPerPage(newUsers);
   };
 
+  //Pagination
   const pageSize = 10;
   const noOfPages = users ? Math.ceil(users.length / pageSize) : 0;
   const pages = _.range(1, noOfPages + 1);
 
+//function to handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
     const startIndex = (page - 1) * pageSize;

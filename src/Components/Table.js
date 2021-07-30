@@ -10,6 +10,8 @@ const Table = ({
   const [selectedId, setSelectedId] = useState([]);
   const [isDeselected, setIsDeselected] = useState()
   
+  //creates an array which stores ids of all selected rows
+  //needed for deleteSelected function
   const selectHandler = (e, id) => {
     if (e.target.checked) {
       selectedId.push(id);
@@ -19,6 +21,8 @@ const Table = ({
     setSelectedId(selectedId);
   };
 
+
+//function to delete all selected rows together
   const deleteSelected = (selectedId) => {
     const newUsers = usersPerPage.filter(
       (user) => !selectedId.includes(user.id)
@@ -26,9 +30,10 @@ const Table = ({
     setUsersPerPage(newUsers);
   };
 
+  //shortcut component on top left to select and deselect all rows
   const deselectAll = (e) => {
     if (e.target.checked) {
-      setIsDeselected(false)
+      setIsDeselected(true)
     }
     else {
       setIsDeselected()
@@ -44,7 +49,8 @@ const Table = ({
         <thead className="thead-dark">
           <tr>
             <th scope="col">
-              <input type="checkbox" onChange={deselectAll} />
+              <input style={{transform:"scale(1.5)"}}
+                type="checkbox" onChange={deselectAll} />
             </th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
@@ -72,6 +78,7 @@ const Table = ({
                     type="checkbox"
                     onChange={(e) => selectHandler(e, user.id)}
                     checked={isDeselected}
+                    style={{transform:"scale(1.5)"}}
                   />
                 </th>
                 <td>{user.name}</td>
