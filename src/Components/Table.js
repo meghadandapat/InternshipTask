@@ -1,6 +1,7 @@
 import { Button} from "react-bootstrap";
 import React, { useState } from "react";
-import Editmodal from "./Editmodal";
+
+import EditableRow from './EditableRow'
 const Table = ({
   usersPerPage,
   deleteHandler,
@@ -9,6 +10,7 @@ const Table = ({
 }) => {
   const [selectedId, setSelectedId] = useState([]);
   const [isDeselected, setIsDeselected] = useState()
+  const [editId, setEditId] = useState(null)
   
   
   //creates an array which stores ids of all selected rows
@@ -41,6 +43,10 @@ const Table = ({
     else {
       setIsDeselected()
     }
+  }
+
+  const editHandler = (id) => {
+    setEditId(id)
   }
  
 
@@ -84,14 +90,25 @@ const Table = ({
                     style={{transform:"scale(1.5)"}}
                   />
                 </th>
-                <td >{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
+                {
+                  editId === user.id ? <EditableRow /> :
+                    <React.Fragment>
+                    <td >{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                    </React.Fragment>
+                }
+                 
+               
                 <td>
-                  <Editmodal id={ user.id}/>.
+                  
+                  <Button className="mr-2" variant="dark" onClick={()=>editHandler(user.id)}>
+                  <i className="far fa-edit"></i>
+                </Button>
                   <Button variant="dark" onClick={() => deleteHandler(user.id)}>
                     <i className="far fa-trash-alt"></i>
                   </Button>
+               
                 </td>
               </tr>
             ))}
@@ -105,6 +122,7 @@ const Table = ({
       >
         Delete
       </button>
+     
     </div>
   );
 };

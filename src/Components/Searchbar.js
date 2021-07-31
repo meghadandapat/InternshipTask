@@ -10,7 +10,7 @@ const Searchbar = ({ searchTerm, setSearchTerm }) => {
             onChange={(e)=>{
                 setSearchTerm(e.target.value)
             }}
-            placeholder="Search Members" />
+            placeholder="Search by name, email or role" />
     </div>
     )
 }
