@@ -2,7 +2,7 @@
 
 https://admin-ui-bymegha.netlify.app/
 
-## User Interface of the platform:
+## User Interface
 
 ![Screenshot](./UI-Snippet.JPG)
 
